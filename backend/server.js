@@ -24,8 +24,18 @@ const permit = new Permit({
   environment: process.env.PERMIT_ENV || 'dev',
 });
 
+// CORS configuration
+const corsOptions = {
+  origin: process.env.NODE_ENV === 'production' 
+    ? ['https://permitron-app.windsurf.build', 'https://permitron-app-m2099.netlify.app'] 
+    : 'http://localhost:5173',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+};
+
 // Middleware
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(morgan('dev'));
 

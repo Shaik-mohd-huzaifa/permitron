@@ -215,6 +215,56 @@ This adds an additional layer of control over which users can leverage AI for ta
 4. Implement permission caching for performance optimization
 5. Add permission-aware UI elements that hide/show based on user permissions
 
+## Demo Credentials
+
+For the purpose of this hackathon project and to facilitate testing, the application includes hardcoded credentials for demonstration:
+
+### Frontend Demo Users
+```javascript
+// From project/src/store/authStore.ts
+users: [
+  {
+    id: '1',
+    name: 'Admin User',
+    email: 'admin@example.com',
+    password: 'admin123',
+    role: 'admin',
+    avatar: 'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=150',
+  },
+  {
+    id: '2',
+    name: 'Employee User',
+    email: 'employee@example.com',
+    password: 'employee123',
+    role: 'employee',
+    avatar: 'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=150',
+  },
+]
+```
+
+### Backend Sample Users
+```javascript
+// From backend/routes/authRoutes.js
+const users = [
+  {
+    id: '1',
+    username: 'admin',
+    password: '$2a$10$XQHEv5SMtPiP.nKjEQaMZeu2.NJu7.fbNnFbQWe9HJ7o1YC1JTM/S', // hashed "password123"
+    email: 'admin@example.com',
+    role: 'admin'
+  },
+  {
+    id: '2',
+    username: 'user',
+    password: '$2a$10$XQHEv5SMtPiP.nKjEQaMZeu2.NJu7.fbNnFbQWe9HJ7o1YC1JTM/S', // hashed "password123"
+    email: 'user@example.com',
+    role: 'user'
+  }
+];
+```
+
+These demo credentials enable testers to explore different permission levels without needing to set up accounts. In a production environment, proper authentication would be implemented with secure user registration and database storage.
+
 ## Conclusion
 
 Permitron demonstrates how combining Permit.io's powerful authorization capabilities with AI-powered interfaces creates a secure, user-friendly task management system. By ensuring that the LLM understands and respects permission boundaries, we've created an application that leverages the power of AI while maintaining robust security controls.

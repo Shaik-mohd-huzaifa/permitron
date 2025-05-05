@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: permitron-api
+    runtime: node
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        sync: false
+      - key: PERMIT_API_KEY
+        sync: false
+      - key: PERMIT_ENV
+        value: dev
+      - key: PERMIT_PDP_URL
+        value: https://cloudpdp.api.permit.io
+      - key: OPENAI_API_KEY
+        sync: false
