@@ -1,0 +1,25 @@
+{
+  "name": "permitron",
+  "version": "1.0.0",
+  "description": "Task management app with fine-grained permissions using Permit.io",
+  "private": true,
+  "scripts": {
+    "start": "cd backend && npm start",
+    "build:frontend": "cd project && npm run build",
+    "build:backend": "cd backend && npm install",
+    "build": "npm run build:frontend && npm run build:backend",
+    "dev:frontend": "cd project && npm run dev",
+    "dev:backend": "cd backend && npm run dev",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\""
+  },
+  "keywords": [
+    "task-management",
+    "permit.io",
+    "rbac",
+    "react",
+    "express"
+  ],
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}

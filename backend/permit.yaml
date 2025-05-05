@@ -1,0 +1,74 @@
+envs:
+  - key: dev
+    name: Development
+    description: Development environment
+    
+resources:
+  - key: task
+    name: Task
+    description: A task in the system
+    attributes:
+      - key: status
+        type: string
+      - key: assignedTo
+        type: string
+      - key: createdBy
+        type: string
+    actions:
+      - key: create
+        name: Create
+        description: Create a new task
+      - key: read
+        name: Read
+        description: Read task details
+      - key: update
+        name: Update
+        description: Update a task
+      - key: delete
+        name: Delete
+        description: Delete a task
+      - key: change_status
+        name: Change Status
+        description: Change the status of a task
+  - key: llm
+    name: LLM
+    description: LLM functions
+    actions:
+      - key: manage_tasks
+        name: Manage Tasks
+        description: Allow LLM to manage tasks on behalf of a user
+
+roles:
+  - key: admin
+    name: Admin
+    description: Administrator with all permissions
+    permissions:
+      - resource: task
+        actions: ["create", "read", "update", "delete", "change_status"]
+      - resource: llm
+        actions: ["manage_tasks"]
+  - key: employee
+    name: Employee
+    description: Regular employee
+    permissions:
+      - resource: task
+        actions: ["create", "read"]
+        condition: "{ assignedTo: user.id } OR { createdBy: user.id }"
+      - resource: task
+        actions: ["update", "delete", "change_status"]
+        condition: "{ createdBy: user.id }"
+      - resource: llm
+        actions: ["manage_tasks"]
+  - key: guest
+    name: Guest
+    description: Guest user with limited access
+    permissions:
+      - resource: task
+        actions: ["read"]
+  - key: llm_assistant
+    name: LLM Assistant
+    description: Special role for LLM to act on behalf of users
+    permissions:
+      - resource: task
+        actions: ["create", "read", "update", "delete", "change_status"]
+        condition: "{ actingOnBehalfOf: true }"
